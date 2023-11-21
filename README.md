@@ -10,8 +10,8 @@ Three commands are supported:
 ## Build: 
 From build folder 
 
-cmake ..
-cmake --build ./
+<br> cmake ..
+<br> cmake --build ./
 
 ## Run
 Test.exe optionName optionValue
