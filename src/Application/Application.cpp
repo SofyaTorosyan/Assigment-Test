@@ -11,7 +11,11 @@ bool Application::run(const std::string& description, const int argc, char* argv
         std::cout << "ERROR: parser failed to finish.\n";
         return false;
     }
-    checkHelpOption();
+    if(helpOpt->getHelp())
+    {
+        checkHelpOption();
+        return true;
+    }
     if (!checkFileNameOption() || !checkChecksumOption())
     {    
         return false;
@@ -39,19 +43,13 @@ Application::createParser(const std::string& description)
 void
 Application::checkHelpOption() const
 {
-    const bool help = helpOpt->getHelp();
-
     std::vector<std::string> optionDesctriptions;
     optionDesctriptions.push_back(fileNameOpt->getDescription());
     optionDesctriptions.push_back(checksumOpt->getDescription());
     optionDesctriptions.push_back(searchPatternOpt->getDescription());
     optionDesctriptions.push_back(helpOpt->getDescription());
-
     const std::string helpDescription = initHelpDescription(optionDesctriptions);
-    if(help)
-    {
-        printHelp(helpDescription);
-    }
+    printHelp(helpDescription);
 }
 
 bool

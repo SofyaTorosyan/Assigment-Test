@@ -1,4 +1,5 @@
 #include "CRC.h"
+#include <vector>
 
 CRC::CRC(std::string name) noexcept
 : m_fileName(std::move(name))
@@ -28,22 +29,18 @@ CRC::calculateFileCRC32() const {
         std::cerr << "Error: Could not open file: " << m_fileName << std::endl;
         exit(EXIT_FAILURE);
     }
-
-    const size_t buffer_size = 1024;
-    char buffer[buffer_size];
-
+    std::vector<char> buffer(1024);
     uint32_t crc = 0xFFFFFFFF;  // Initialize with all bits set
 
-    while (file.read(buffer, buffer_size)) {
-        crc = calculateCRC32(buffer, buffer_size);
+    while (file.read(buffer.data(), buffer.size())) {
+        crc = calculateCRC32(buffer.data(), buffer.size());
     }
 
     // Handle the last part of the file if it's not a multiple of buffer size
     if (file.gcount() > 0) {
-        crc = calculateCRC32(buffer, file.gcount());
+        crc = calculateCRC32(buffer.data(), file.gcount());
     }
 
     file.close();
-
     return crc;
 }

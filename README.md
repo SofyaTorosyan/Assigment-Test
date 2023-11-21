@@ -4,3 +4,12 @@ Three commands are supported:
 <commandName> -h :  Gives information about the program.
 <commandName> -f <fileName> -m checksum: Prints 32bit checksum, checksum = word1 + word2 + ...  
 <commandName> -f <fileName> -m words -v mother: Returns number of <mother> word in <fileName> file
+
+## Build: 
+From build folder 
+
+cmake ..
+cmake --build ./
+
+## Run
+Test.exe  <optionName> <optionValue>
