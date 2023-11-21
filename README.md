@@ -12,4 +12,4 @@ cmake ..
 cmake --build ./
 
 ## Run
-Test.exe  <optionName> <optionValue>
+Test.exe  optionName optionValue
